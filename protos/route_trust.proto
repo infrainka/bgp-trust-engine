@@ -1,0 +1,20 @@
+syntax = "proto3";
+package route_trust;
+
+service TrustEngine {
+    rpc ValidateRoute (RouteRequest) returns (TrustReply) {}
+}
+
+message RouteRequest {
+    string prefix_address = 1;
+    uint32 prefix_length = 2;
+    uint32 peer_asn = 3;
+    repeated uint32 as_path = 4;
+    string router_id = 5;
+}
+
+message TrustReply {
+    bool is_legit = 1;
+    float trust_score_penalty = 2;
+    string reason = 3;
+}
